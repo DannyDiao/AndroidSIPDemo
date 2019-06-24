@@ -2,10 +2,11 @@ var express = require('express');
 var app = express();
 var https = require('https'),
     fs = require('fs');
-var options = {
-    key: fs.readFileSync('./privatekey.pem'),
-    cert: fs.readFileSync('./certificate.pem')
-}
+const options = {
+    pfx: fs.readFileSync('../SSL/diaosudev.cn.pfx'),
+    passphrase: '873340a0lc6w5'
+  };
+
 var httpsServer = https.createServer(options,app);
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
