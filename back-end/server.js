@@ -1,13 +1,9 @@
 var express = require('express');
 var app = express();
-var https = require('https'),
-    fs = require('fs');
-const options = {
-    pfx: fs.readFileSync('../SSL/diaosudev.cn.pfx'),
-    passphrase: '873340a0lc6w5'
-  };
+var http = require('http'),
+var fs = require('fs');
 
-var httpsServer = https.createServer(options,app);
+var httpServer = http.createServer(app);
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 app.use(bodyParser.json());
@@ -16,7 +12,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-httpsServer.listen(6666);
+
 
 var user = require("./user.js");
 
@@ -68,3 +64,5 @@ app.post('/register', function (req, res) {
     console.log("新增用户：" + newUser);
     res.send("success!");
 });
+
+httpServer.listen(6666);
