@@ -2,7 +2,7 @@
 const https = require('https');
 const fs_1 = require('fs');
 const options = {
-    pfx: fs_1.readFileSync('../../SSL/diaosudev.cn.pfx'),
+    pfx: fs_1.readFileSync('../SSL/diaosudev.cn.pfx'),
     passphrase: '873340a0lc6w5'
   };
 
@@ -61,7 +61,7 @@ app.get('/login', function(req, res){
 
 //使用POST方法来对用户数据库做增加操作
 app.post('/register', function (req, res) {
-    var newUser = new User({
+    var newUser = new user({
         name: req.body.name,
         userID: req.body.userID,
         password: req.body.password
