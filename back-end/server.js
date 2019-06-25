@@ -18,9 +18,15 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-
-
 var user = require("./user.js");
+//启动时更新当前库中用户
+// var users = [];
+// user.find(function (err, users) {
+//     users.forEach(function (err, docs) {
+//         users.
+//     })
+// })
+
 
 //使用GET方法来确定用户ID是否已存在，存在返回true，app接收到false后才提示用户注册成功
 app.get('/isregister', function(req, res){
@@ -44,6 +50,7 @@ app.get('/login', function(req, res){
             res.send(500, 'Error occurred: database error.');
         }
         if (user.password == req.body.password) {   //验证密码,密码正确，验证通过
+            console.log(req.body.userID + "登陆");
             res.json({
                 pass: true
             })
