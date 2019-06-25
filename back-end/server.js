@@ -1,11 +1,17 @@
+
+const https = require('https');
+const fs_1 = require('fs');
+const options = {
+    pfx: fs_1.readFileSync('../../SSL/diaosudev.cn.pfx'),
+    passphrase: '873340a0lc6w5'
+  };
+
+
 var express = require('express');
 var app = express();
-var http = require('http'),
-var fs = require('fs');
-
-var httpServer = http.createServer(app);
+var httpsServer = https.createServer(options,app);
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
 app.use(bodyParser.urlencoded({
@@ -65,4 +71,4 @@ app.post('/register', function (req, res) {
     res.send("success!");
 });
 
-httpServer.listen(6666);
+httpsServer.listen(6666);
