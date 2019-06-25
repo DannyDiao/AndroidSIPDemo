@@ -24,7 +24,7 @@ var user = require("./user.js");
 
 //使用GET方法来确定用户ID是否已存在，存在返回true，app接收到false后才提示用户注册成功
 app.get('/isregister', function(req, res){
-    user.findOne({ userID: req.query.userID }, function(err, user) {   //有相同用户id，注册失败
+    user.findOne({ userID: req.body.userID }, function(err, user) {   //有相同用户id，注册失败
         if (err) {
             res.send(500, 'Error occurred: database error.');
         }
@@ -39,11 +39,11 @@ app.get('/isregister', function(req, res){
 
 //使用GET方法来验证登陆时账号密码的正确性，若id、密码均正确，返回true,否则返回false及失败原因
 app.get('/login', function(req, res){
-    user.findOne({ userID: req.query.userID }, function(err,user) {  //验证id
+    user.findOne({ userID: req.body.userID }, function(err,user) {  //验证id
         if (err) {
             res.send(500, 'Error occurred: database error.');
         }
-        if (user.password == req.query.password) {   //验证密码,密码正确，验证通过
+        if (user.password == req.body.password) {   //验证密码,密码正确，验证通过
             res.json({
                 pass: true
             })
