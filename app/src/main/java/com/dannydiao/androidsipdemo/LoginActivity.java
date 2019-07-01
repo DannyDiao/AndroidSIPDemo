@@ -1,12 +1,16 @@
 package com.dannydiao.androidsipdemo;
 
 import android.content.Intent;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -54,11 +58,36 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        Log.d("响应", response.body().string());
+                        String LoginResult = response.body().string();
+                        Boolean LoginStatus = false;
+                        String LoginDes;
+                        try {
+                            JSONObject jsonObject = new JSONObject(LoginResult);
+                            LoginStatus = jsonObject.getBoolean("pass");
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        if (LoginStatus) {
+                            Intent intent = new Intent(getApplication(), HallActivity.class);
+                            startActivity(intent);
+                        } else if (!LoginStatus) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(LoginResult);
+                                LoginDes = jsonObject.getString("description");
+                                Looper.prepare();
+                                Toast.makeText(getApplication(), LoginDes, Toast.LENGTH_SHORT).show();
+                                Looper.loop();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
                     }
                 });
-
-
 
 
             }
