@@ -18,9 +18,7 @@
         android:text="hello"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginLeft="4dp"
-        android:layout_margin="4dp"
-        android:layout_alignBottom="@id/single_ID"/>
+        android:layout_marginLeft="4dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,6 +27,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginLeft="100dp"
+        android:layout_toRightOf="@id/single_name"
         android:text="world"/>
 
 
