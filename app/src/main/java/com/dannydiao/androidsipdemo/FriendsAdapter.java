@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.VH> {
@@ -26,11 +27,11 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.VH> {
         }
     }
 
-    private List<String> nameArray;
-    private List<String> IDArray;
+    private ArrayList<String> nameArray;
+    private ArrayList<String> IDArray;
 
     //FriendsAdapter的默认构造器
-    public FriendsAdapter(List<String> data1, List<String> data2) {
+    public FriendsAdapter(ArrayList<String> data1, ArrayList<String> data2) {
         this.nameArray = data1;
         this.IDArray = data2;
 

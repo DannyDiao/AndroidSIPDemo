@@ -1,5 +1,6 @@
 package com.dannydiao.androidsipdemo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -11,23 +12,18 @@ import java.util.List;
 
 public class HallActivity extends AppCompatActivity {
 
-    List<String> name = new ArrayList<>();
-    List<String> ID = new ArrayList<>();
-
+    ArrayList<String> name = new ArrayList<>();
+    ArrayList<String> ID = new ArrayList<>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hall);
-        name.add("测试");
-        name.add("测试");
-        name.add("测试");
-        name.add("测试");
-        ID.add("测试");
-        ID.add("测试");
-        ID.add("测试");
-        ID.add("测试");
+        Intent intent = getIntent();
+
+        name = intent.getStringArrayListExtra("name");
+        ID = intent.getStringArrayListExtra("ID");
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -35,6 +31,9 @@ public class HallActivity extends AppCompatActivity {
         recyclerView.setAdapter(friendsAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext()
                 , DividerItemDecoration.VERTICAL));
+
+        Intent intent1 = new Intent(getApplication(), CallActivity.class);
+        startActivity(intent1);
 
     }
 }
